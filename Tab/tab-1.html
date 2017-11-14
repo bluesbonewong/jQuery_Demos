@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<style>
+		ul,
+		li {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		}
+
+		a {
+			text-decoration: none;
+			color: inherit;
+		}
+
+		.click {
+			color: red;
+			background: darkgrey;
+		}
+
+		.tab > ul {
+			border: 1px solid darkgrey;
+			border-radius: 4px 4px 0 0;
+			display: flex;
+			width: 194px;
+			justify-content: space-between;
+			border-bottom: none;
+		}
+
+		.tab > ul > li > a {
+			display: block;
+			margin: 8px 0;
+			padding: 0 8px;
+			border-right: 1px solid darkgrey;
+		}
+
+		.tab > ul > li:last-child > a {
+			border: none;
+		}
+
+		.container {
+			position: relative;
+		}
+
+		.container > .show {
+			display: flex;
+			position: unset;
+		}
+
+		.container > ul {
+			width: 50%;
+			display: none;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			border: 1px solid darkgrey;
+			position: absolute;
+		}
+
+		.container > ul > li {
+			width: 30%;
+			border: 1px solid darkgrey;
+			text-align: center;
+			position: relative;
+		}
+
+		.container > ul > li:nth-of-type(1),
+		.container > ul > li:nth-of-type(2),
+		.container > ul > li:nth-of-type(3) {
+			margin-bottom: 15px;
+		}
+
+		.container > ul > li > span {
+			color: red;
+		}
+
+		.container > ul > li > div {
+			background: rgba(0, 0, 0, 0.3);
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			top: 0;
+			display: none;
+			align-items: center;
+			justify-content: center;
+			transition: all ease .3s;
+		}
+
+		.container > ul > li.mouseover > div {
+			display: flex;
+		}
+
+		.container > ul > li > div > a {
+			font-size: 14px;
+			display: block;
+			border: 1px solid red;
+			color: red;
+			background: #fffdef;
+			padding: 8px 6px;
+			border-radius: 4px;
+		}
+	</style>
+	<title>Tab</title>
+</head>
+<body>
+<div class="tab">
+	<ul>
+		<li class="click"><a href="#">热门</a></li>
+		<li><a href="#">珠宝首饰</a></li>
+		<li><a href="#">奢侈品</a></li>
+	</ul>
+</div>
+<div class="container">
+	<ul class="show">
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+	</ul>
+	<ul>
+		<li><img src="http://img12.360buyimg.com/N3/jfs/t2302/181/1562193880/220016/88a978ef/56cbbc11Nd6d3b04b.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+	</ul>
+	<ul>
+		<li><img src="http://img13.360buyimg.com/N3/jfs/t2461/336/2166939566/101221/3af27699/56c426a5N9b6673f4.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+	</ul>
+</div>
+<div class="tab">
+	<ul>
+		<li class="click"><a href="#">热门</a></li>
+		<li><a href="#">珠宝首饰</a></li>
+		<li><a href="#">奢侈品</a></li>
+	</ul>
+</div>
+<div class="container">
+	<ul class="show">
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+	</ul>
+	<ul>
+		<li><img src="http://img12.360buyimg.com/N3/jfs/t2302/181/1562193880/220016/88a978ef/56cbbc11Nd6d3b04b.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+	</ul>
+	<ul>
+		<li><img src="http://img13.360buyimg.com/N3/jfs/t2461/336/2166939566/101221/3af27699/56c426a5N9b6673f4.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+		<li><img src="http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg" alt="">
+			<p>超级牛逼吊坠</p>
+			<span>1699</span>
+			<div><a href="">立即抢购</a></div>
+		</li>
+	</ul>
+</div>
+<script>
+	var $tabClickNodes = $('.tab > ul > li')
+	var $containerShowNodes = $('.container > ul')
+	var $mouseoverDivNodes = $('.container > ul > li')
+
+	for (var i = 0; i < $tabClickNodes.length; i++) {
+		$tabClickNodes.get(i).index = i
+
+		$tabClickNodes.eq(i).on('click', function (e) {
+			e.stopPropagation()
+			e.preventDefault()
+			$(this).siblings().removeClass('click')
+			// 使用siblings 有意想不到的收获哟
+			$containerShowNodes.eq(this.index).siblings().removeClass('show')
+			$(this).addClass('click')
+			$containerShowNodes.eq(this.index).addClass('show')
+		})
+	}
+
+	for (var j = 0; j < $mouseoverDivNodes.length; j++) {
+		$mouseoverDivNodes.eq(j).on('mouseover', function (e) {
+			e.stopPropagation()
+			$(this).addClass('mouseover')
+		})
+		$mouseoverDivNodes.eq(j).on('mouseout', function (e) {
+			e.stopPropagation()
+			$(this).removeClass('mouseover')
+		})
+	}
+</script>
+</body>
+</html>
