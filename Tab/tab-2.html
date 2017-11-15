@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<style>
+		a {
+			color: inherit;
+			text-decoration: none;
+		}
+
+		ul,
+		li {
+			list-style: none;
+			padding: 0;
+		}
+
+		#wrap {
+			margin: 10px auto;
+			width: 50%;
+		}
+
+		.container > ul {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			text-align: center;
+			width: inherit;
+		}
+
+		.container > ul > li {
+			margin-bottom: 15px;
+			width: 30%;
+			border: 1px solid darkgrey;
+			position: relative;
+		}
+
+		.container > ul > li > span {
+			color: red;
+		}
+
+		.container > ul > li > div {
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			top: 0;
+			display: flex;
+			opacity: 0;
+			align-items: center;
+			justify-content: center;
+			transition: all ease .3s;
+			background: rgba(0, 0, 0, 0.3);
+		}
+
+		.container > ul > li.mouseover > div {
+			opacity:1;
+		}
+
+		.container > ul > li > div > a {
+			font-size: 14px;
+			display: block;
+			border: 1px solid red;
+			color: red;
+			background: #fffdef;
+			padding: 8px 6px;
+			border-radius: 4px;
+		}
+
+		#wrap button {
+			border: none;
+			padding: 0;
+		}
+
+		#wrap > button > a {
+			padding: 12px 16px;
+			border: 1px solid orange;
+			transition: all ease .3s;
+			color: red;
+			font-size: 16px;
+			border-radius: 4px;
+		}
+
+		#wrap > button > a:hover {
+			background: orange;
+			box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.2);
+		}
+	</style>
+	<title>Tab-agent</title>
+</head>
+<body>
+<div id="wrap">
+	<h1>珠宝首饰</h1>
+	<div class="container">
+		<ul>
+			<li><img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg"
+			         alt="项链">
+				<p>牛逼项链</p>
+				<span>￥1699</span>
+				<div><a href="">立即抢购</a></div>
+			</li>
+			<li><img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg"
+			         alt="项链">
+				<p>牛逼项链</p>
+				<span>￥1699</span>
+				<div><a href="">立即抢购</a></div>
+			</li>
+			<li><img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg"
+			         alt="项链">
+				<p>牛逼项链</p>
+				<span>￥1699</span>
+				<div><a href="">立即抢购</a></div>
+			</li>
+			<li><img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg"
+			         alt="项链">
+				<p>牛逼项链</p>
+				<span>￥1699</span>
+				<div><a href="">立即抢购</a></div>
+			</li>
+			<li><img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg"
+			         alt="项链">
+				<p>牛逼项链</p>
+				<span>￥1699</span>
+				<div><a href="">立即抢购</a></div>
+			</li>
+			<li><img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg"
+			         alt="项链">
+				<p>牛逼项链</p>
+				<span>￥1699</span>
+				<div><a href="">立即抢购</a></div>
+			</li>
+		</ul>
+	</div>
+	<button><a href="#">添加</a></button>
+</div>
+<script>
+	var products = [
+		{
+			img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg',
+			name: '珂兰 黄金手 猴哥款',
+			price: '￥405.00'
+		}, {
+			img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg',
+			name: '珂兰 黄金转运珠 猴哥款',
+			price: '￥100.00'
+		}, {
+			img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg',
+			name: '珂兰 黄金手链 3D猴哥款',
+			price: '￥45.00'
+		}
+	]
+	var $btnNode = $('#wrap > button > a')
+	var $ulNodes = $('#wrap > .container > ul')
+
+	$btnNode.on('click', function (e) {
+		e.preventDefault()
+		e.stopPropagation()
+		var array = []
+		for (var i = 0; i < products.length; i++) {
+			array[i] = $(`<li><img src="${products[i].img}"><p>${products[i].name}</p><span>${products[i].price}</span><div><a href="">立即抢购</a></div>
+</li>`)
+			$('.container > ul').append(array[i])
+		}
+	})
+
+	$ulNodes.on('mouseover', 'li', function (e) {
+		e.stopPropagation()
+		$(this).addClass('mouseover')
+	})
+
+	$ulNodes.on('mouseout','li',function (e) {
+		e.stopPropagation()
+		$(this).removeClass('mouseover')
+	})
+
+</script>
+</body>
+</html>
