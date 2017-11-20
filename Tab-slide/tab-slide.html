@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<style>
+		li,
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		.mod-tab > .tabs {
+			display: flex;
+			border: 1px solid grey;
+			text-align: center;
+		}
+
+		.mod-tab > .tabs > li {
+			flex-grow: 1;
+			border-right: 1px solid grey;
+		}
+		.mod-tab > .tabs > li.active {
+			background: grey;
+		}
+
+		.mod-tab > .tabs > li:last-child {
+			border-right: none;
+		}
+
+		.wrap {
+			height: 180px;
+			overflow: hidden;
+			position: relative;
+			border: 1px solid grey;
+			border-top: none;
+			margin-bottom: 20px;
+			/*关键在wrap层设置overflow:hidden和相对定位*/
+		}
+
+		.wrap > .panels {
+			position: absolute;
+			width: 100%;
+			/*在panel层设置top，用js控制top的值*/
+		}
+
+		.wrap > .panels.position {
+			top:;
+		}
+
+		.wrap > .panels > li {
+			height: 180px;
+		}
+
+		.wrap > .panels > li:nth-child(1) {
+			background: red;
+		}
+
+		.wrap > .panels > li:nth-child(2) {
+			background: green;
+		}
+
+		.wrap > .panels > li:nth-child(3) {
+			background: yellow;
+		}
+	</style>
+	<title>Tab-Slide</title>
+</head>
+<body>
+<div class="mod-tab">
+	<ul class="tabs">
+		<li class="active">tab1</li>
+		<li>tab2</li>
+		<li>tab3</li>
+	</ul>
+	<div class="wrap">
+		<ul class="panels">
+			<li class="position">content1</li>
+			<li>content2</li>
+			<li>content3</li>
+		</ul>
+	</div>
+</div>
+<script>
+	var $tabNodes = $('.mod-tab > .tabs > li')
+
+	for (var i = 0; i < $tabNodes.length; i++) {
+		$tabNodes.eq(i).on('click', function (e) {
+			var $this = $(this)
+			// 防止对此函数进行重复调用
+			var $index = $this.index()
+			$this.addClass('active').siblings().removeClass('active')
+			// 注意这里的链式调用
+			$this.parents('.mod-tab').find('.panels')
+				                       .animate({top:0 - $index*180},1000)
+			// 注意先找父元素，再利用find找到需要的元素，再用animate设置css动画
+		})
+	}
+</script>
+</body>
+</html>
