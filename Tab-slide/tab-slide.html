@@ -44,16 +44,14 @@
 
 		.wrap > .panels {
 			position: absolute;
-			width: 100%;
+			width: 300%;
+			display: flex;
 			/*在panel层设置top，用js控制top的值*/
-		}
-
-		.wrap > .panels.position {
-			top:;
 		}
 
 		.wrap > .panels > li {
 			height: 180px;
+			width: 100%;
 		}
 
 		.wrap > .panels > li:nth-child(1) {
@@ -96,7 +94,7 @@
 			$this.addClass('active').siblings().removeClass('active')
 			// 注意这里的链式调用
 			$this.parents('.mod-tab').find('.panels')
-				                       .animate({top:0 - $index*180},1000)
+				                       .animate({left:0 - $index*100 + '%'},1000)
 			// 注意先找父元素，再利用find找到需要的元素，再用animate设置css动画
 		})
 	}
