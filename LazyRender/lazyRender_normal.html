@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<!--很重要的两个meta标签。keywords和description-->
+	<meta name="keywords" content="lazyLoad">
+	<meta name="description" content="bluesblone private demo,lazyLoad">
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<style>
+		ul, li {
+			list-style: none;
+		}
+
+		.container {
+			width: 600px;
+			margin: 0 auto;
+		}
+
+		.container li {
+			float: left;
+			margin: 10px 10px;
+		}
+
+		.container li img {
+			width: 240px;
+			height: 180px;
+		}
+
+		p {
+			float: left;
+		}
+	</style>
+	<title>懒加载【自定义属性实现】</title>
+</head>
+<body>
+<ul class="container">
+	<li><a href="#"><img src="" data-src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg"/></a></li>
+	<li><a href="#"><img
+		src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg"
+		data-src="http://cdn.jirengu.com/book.jirengu.com/img/2.jpg"/></a></li>
+	<li><a href="#"><img
+		src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg"
+		data-src="http://cdn.jirengu.com/book.jirengu.com/img/3.jpg"/></a></li>
+	<li><a href="#"><img
+		src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg"
+		data-src="http://cdn.jirengu.com/book.jirengu.com/img/4.jpg"/></a></li>
+	<li><a href="#"><img
+		src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg"
+		data-src="http://cdn.jirengu.com/book.jirengu.com/img/5.jpg"/></a></li>
+	<li><a href="#"><img
+		src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg"
+		data-src="http://cdn.jirengu.com/book.jirengu.com/img/6.jpg"/></a></li>
+	<li><a href="#"><img
+		src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg"
+		data-src="http://cdn.jirengu.com/book.jirengu.com/img/7.jpg"/></a></li>
+	<li><a href="#"><img
+		src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg"
+		data-src="http://cdn.jirengu.com/book.jirengu.com/img/8.jpg"/></a></li>
+	<li><a href="#"><img
+		src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg"
+		data-src="http://cdn.jirengu.com/book.jirengu.com/img/9.jpg"/></a></li>
+	<li><a href="#"><img
+		src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg"
+		data-src="http://cdn.jirengu.com/book.jirengu.com/img/10.jpg"/></a></li>
+	<li><a href="#"><img
+		src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg"
+		data-src="http://cdn.jirengu.com/book.jirengu.com/img/11.jpg"/></a></li>
+	<li><a href="#"><img
+		src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg"
+		data-src="http://cdn.jirengu.com/book.jirengu.com/img/12.jpg"/></a></li>
+	<li><a href="#"><img
+		src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg"
+		data-src="http://cdn.jirengu.com/book.jirengu.com/img/13.jpg"/></a></li>
+	<li><a href="#"><img
+		src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg"
+		data-src="http://cdn.jirengu.com/book.jirengu.com/img/14.jpg"/></a></li>
+	<li><a href="#"><img
+		src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg"
+		data-src="http://cdn.jirengu.com/book.jirengu.com/img/15.jpg"/></a></li>
+	<li><a href="#"><img
+		src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg"
+		data-src="http://cdn.jirengu.com/book.jirengu.com/img/16.jpg"/></a></li>
+</ul>
+</body>
+<script>
+	// lazyRender原理解析
+	// 1.对于所有img，把其地址放入img的自定义属性，如data-src中【或者放入一个数组内】
+	// 2.当页面滚动时，判断该img元素是否出现在视野内，再判断其是否被加载过，若未被加载，则加载，已加载则忽略
+
+	// 构建三个函数实现上述思路
+	// isVisible 判断元素是否出现在视野内
+	// isLoaded 判断是否加载过
+	// loadImg 加载图片地址
+
+
+	var $imgs = $('.container img')
+	var clock
+
+	lazyRender() // 保证在页面不滚动的情况下，第一屏的图片也可以加载
+
+	$(window).on('scroll', function () {
+		// 优化代码
+		if (clock) {
+			clearTimeout(clock)
+		}
+		clock = setTimeout(function () {
+			lazyRender()
+		}, 100)
+	})
+
+	function lazyRender() {
+		$imgs.each(function () {
+			var $this = $(this)
+			if (isVisible($this) && isLoaded($this)) {
+				loadImg($this)
+			}
+		})
+	}
+
+	function isVisible($node) {
+		// 判断元素是否出现在屏幕内
+
+		// 滚动条位置
+		var scrollTop = $(window).scrollTop()
+		// 屏幕高度
+		var windowHeight = $(window).height()
+		// 元素距离顶部的高度
+		var offsetTop = $node.offset().top
+
+		// 核心是满足一个临界条件——元素出现在屏幕底部
+		// offsetTop <= scrollTop + windowHeight
+		// offsetTop > scrollTop
+		if (offsetTop + 10 <= scrollTop + windowHeight && offsetTop > scrollTop) {
+			return true
+		}
+		return false
+	}
+
+	function isLoaded($node) {
+		return !($node.attr('src') === $node.attr('data-src'))
+	}
+
+	function loadImg($node) {
+		$node.attr('src', $node.attr('data-src'))
+	}
+
+
+</script>
+</html>
