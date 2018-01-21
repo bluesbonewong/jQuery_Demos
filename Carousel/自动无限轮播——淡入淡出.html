@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<style>
+		body {
+			margin: 0;
+		}
+
+		a {
+			text-decoration: none;
+			color: inherit;
+		}
+
+		ul,
+		li {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		.carousel {
+			width: 350px;
+			overflow: hidden;
+			/*overflow:hidden;非常重要*/
+			position: relative;
+			height: 150px;
+		}
+
+		.carousel .img-ct {
+			height: 150px;
+			position: absolute;
+			/*宽度和left要用js设置，因为li个数不确定*/
+		}
+
+		.carousel .img-ct > li {
+			position: relative;
+			display: none;
+		}
+
+		.carousel .arrow {
+			position: absolute;
+			display: inline-block;
+			height: 30px;
+			width: 30px;
+			border-radius: 50%;
+			border: 1px solid #ffffff;
+			top: 60px;
+			text-align: center;
+			line-height: 28px;
+			color: #fff;
+			font-weight: bold;
+		}
+
+		.carousel .arrow:hover {
+			opacity: 0.6;
+		}
+
+		.carousel .pre {
+			left: 10px;
+		}
+
+		.carousel .next {
+			right: 10px;
+		}
+
+		.carousel .bullet {
+			width: 120px;
+			height: 6px;
+			position: absolute;
+			z-index: 1;
+			bottom: 15px;
+			left: 115px;
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.carousel .bullet > li {
+			width: 24px;
+			background: #fff;
+			border-radius: 4px;
+		}
+
+		.carousel .bullet > .active {
+			background: darkgray;
+		}
+
+	</style>
+	<title>轮播——思路一</title>
+</head>
+<body>
+<!--标签越少越好，命名越精简越好-->
+
+<!--图片部分-->
+<div class="carousel">
+	<!--carousel n.旋转木马-->
+	<ul class="img-ct">
+		<li data-id="0"><a href="#"><img src="http://via.placeholder.com/350x150/B749BA" alt="picture"></a></li>
+		<li data-id="1"><a href="#"><img src="http://via.placeholder.com/350x150/EE862D" alt="picture"></a></li>
+		<li data-id="2"><a href="#"><img src="http://via.placeholder.com/350x150/000000" alt="picture"></a></li>
+		<li data-id="3"><a href="#"><img src="http://via.placeholder.com/350x150/CF575C" alt="picture"></a></li>
+	</ul>
+
+	<!--箭头部分-->
+	<a href="#" class="pre arrow"><</a>
+	<a href="#" class="next arrow">></a>
+
+	<!--底部选择条部分-->
+	<ul class="bullet">
+		<li class="active"></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>
+
+<script>
+	var $ct = $('.img-ct')
+	var $items = $ct.children()
+	var imgCount = $items.length
+	var $bullets = $('.bullet > li')
+
+	var $nextBtn = $('.next')
+	var $preBtn = $('.pre')
+
+	var clock
+
+	var currentIdx = 0
+	// 当前li的index
+	var isAnimate = false
+
+	play(currentIdx)
+	autoPlay()
+
+	$nextBtn.on('click', function (e) {
+		e.preventDefault()
+		playNext(1)
+	})
+
+	$preBtn.on('click', function (e) {
+		e.preventDefault()
+		playPre(1)
+	})
+
+	$bullets.on('click', function (e) {
+		var $this = $(this)
+		var bulletIdx = $this.index()
+		e.preventDefault()
+		if (bulletIdx < currentIdx) {
+			playPre(currentIdx - bulletIdx)
+		} else if (bulletIdx > currentIdx) {
+			playNext(bulletIdx - currentIdx)
+		}
+		clearInterval(clock)
+		// 清除clock
+		autoPlay()
+		// 再次自动播放
+	})
+
+	function playNext(len) {
+		play((currentIdx + len) % imgCount)
+		// 利用取余来使得可以同时设置preIdx和currentIdx
+	}
+
+	function playPre(len) {
+		play((currentIdx + imgCount - len) % imgCount)
+		// 这是一个技巧，强记！！！！！
+	}
+
+	function play(nextIdx) {
+		if (isAnimate) return
+		isAnimate = true
+		$items.eq(currentIdx).fadeOut(500)
+		$items.eq(nextIdx).fadeIn(500, function () {
+			isAnimate = false
+		})
+		currentIdx = nextIdx
+		addActive()
+	}
+
+	function addActive() {
+		$bullets.removeClass('active').eq(currentIdx).addClass('active')
+	}
+
+	function autoPlay() {
+		clock = setInterval(function () {
+			playNext(1)
+		}, 3000)
+	}
+</script>
+
+</body>
+</html>

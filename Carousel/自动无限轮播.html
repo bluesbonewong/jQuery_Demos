@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<style>
+		body {
+			margin: 0;
+		}
+
+		a {
+			text-decoration: none;
+			color: inherit;
+		}
+
+		ul,
+		li {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		.carousel {
+			width: 350px;
+			overflow: hidden;
+			/*overflow:hidden;非常重要*/
+			position: relative;
+			height: 150px;
+		}
+
+		.carousel .img-ct {
+			height: 150px;
+			position: absolute;
+			/*宽度和left要用js设置，因为li个数不确定*/
+		}
+
+		.carousel .img-ct > li {
+			float: left;
+		}
+
+		.carousel .arrow {
+			position: absolute;
+			display: inline-block;
+			height: 30px;
+			width: 30px;
+			border-radius: 50%;
+			border: 1px solid #ffffff;
+			top: 60px;
+			text-align: center;
+			line-height: 28px;
+			color: #fff;
+			font-weight: bold;
+		}
+
+		.carousel .arrow:hover {
+			opacity: 0.6;
+		}
+
+		.carousel .pre {
+			left: 10px;
+		}
+
+		.carousel .next {
+			right: 10px;
+		}
+
+		.carousel .bullet {
+			width: 120px;
+			height: 6px;
+			position: absolute;
+			z-index: 1;
+			bottom: 15px;
+			left: 115px;
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.carousel .bullet > li {
+			width: 24px;
+			background: #fff;
+			border-radius: 4px;
+		}
+
+		.carousel .bullet > .active {
+			background: darkgray;
+		}
+
+	</style>
+	<title>轮播——思路一</title>
+</head>
+<body>
+<!--标签越少越好，命名越精简越好-->
+
+<!--图片部分-->
+<div class="carousel">
+	<!--carousel n.旋转木马-->
+	<ul class="img-ct">
+		<li data-id="0"><a href="#"><img src="http://via.placeholder.com/350x150/B749BA" alt="picture"></a></li>
+		<li data-id="1"><a href="#"><img src="http://via.placeholder.com/350x150/EE862D" alt="picture"></a></li>
+		<li data-id="2"><a href="#"><img src="http://via.placeholder.com/350x150/000000" alt="picture"></a></li>
+		<li data-id="3"><a href="#"><img src="http://via.placeholder.com/350x150/CF575C" alt="picture"></a></li>
+	</ul>
+
+	<!--箭头部分-->
+	<a href="#" class="pre arrow"><</a>
+	<a href="#" class="next arrow">></a>
+
+	<!--底部选择条部分-->
+	<ul class="bullet">
+		<li class="active"></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>
+
+<script>
+	var $imgCt = $('.carousel .img-ct')
+	var $imgs = $('.carousel .img-ct > li')
+	var $preBtn = $('.carousel .pre')
+	var $nextBtn = $('.carousel .next')
+	var $bulletLis = $('.carousel .bullet li')
+
+	var pageIndex = 0
+	var isAnimate = false
+	// 为了保证在动化进程中，锁住一些功能键，防止重复触发动画
+	// 默认为false
+
+	var imgCount = $imgs.length
+	var imgWidth = $imgs.width()
+
+	$imgCt.append($imgs.first().clone())
+	$imgCt.prepend($imgs.last().clone())
+
+	// 宽度要用js设置，因为li个数不确定
+	// 尽量全用变量表示数字，因为li个数不确定
+	$imgCt.css({
+		width: `${(imgCount + 2) * imgWidth}px`,
+		left: `${-imgWidth}px`
+	})
+
+	$imgs.click(function (e) {
+		e.preventDefault()
+	})
+
+	$nextBtn.click(function (e) {
+		e.preventDefault()
+		playNext(1)
+	})
+
+	$preBtn.click(function (e) {
+		e.preventDefault()
+		playPre(1)
+	})
+
+	$bulletLis.on('click', function () {
+		var index = $(this).index()
+		if (index > pageIndex) {
+			playNext(index - pageIndex)
+		} else {
+			playPre(pageIndex - index)
+		}
+	})
+
+	AutoPlay()
+
+	function AutoPlay() {
+		setInterval(function () {
+			playNext(1)
+		},5000)
+	}
+
+	function playNext(len) {
+		if (isAnimate) return
+		// 如果没有进行动画，继续下面过程
+		isAnimate = true
+		// 开始进行动画，将锁打开
+		$imgCt.animate({
+			left: '-=' + len * imgWidth
+		}, function () {
+			// 动画结束之后要做的事——所有的事情【需要被执行的函数】都要到这里来
+			// animate不结束，设置的其它css【如.css()】皆会被其覆盖
+			// 解决方案:在animate后加一个function
+			pageIndex = len + pageIndex
+			if (pageIndex === imgCount) {
+				pageIndex = 0
+				$imgCt.css({
+					left: -imgWidth + 'px'
+				})
+			}
+			console.log(pageIndex)
+			addActive()
+			isAnimate = false
+			// 动画结束，关闭锁
+		})
+	}
+
+	function playPre(len) {
+		if (isAnimate) return
+		isAnimate = true
+		$imgCt.animate({
+			left: '+=' + len * imgWidth
+		}, function () {
+			pageIndex = pageIndex - len
+			if (pageIndex === -1) {
+				pageIndex = imgCount - 1
+				$imgCt.css({
+					left: imgCount * (-imgWidth) + 'px'
+				})
+			}
+			console.log(pageIndex)
+			addActive()
+			isAnimate = false
+		})
+	}
+
+	function addActive() {
+		$bulletLis.removeClass('active').eq(pageIndex).addClass('active')
+	}
+
+</script>
+</body>
+</html>
