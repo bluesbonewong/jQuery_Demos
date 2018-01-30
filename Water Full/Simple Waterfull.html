@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<style>
+		body {
+			margin: 0;
+		}
+
+		.content {
+			position: relative;
+		}
+
+		/*父级容器相对定位*/
+
+		.item {
+			position: absolute;
+			width: 200px;
+			margin-right: 10px;
+			margin-left: 10px;
+			transition: all 1s;
+		}
+
+		/*下面三个css设置是为了让高度随机*/
+		.h1 {
+			height: 200px;
+			background-color: #f4b300;
+		}
+
+		.h2 {
+			height: 300px;
+			background-color: #691BB8;
+		}
+
+		.h3 {
+			height: 400px;
+			background-color: #006ac1;
+		}
+	</style>
+	<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+	<title>Simple Waterfull</title>
+</head>
+<body>
+<div class="content">
+	<div class="item h1">
+		1
+	</div>
+	<div class="item h3">
+		2
+	</div>
+	<div class="item h2">
+		3
+	</div>
+	<div class="item h1">
+		4
+	</div>
+	<div class="item h1">
+		5
+	</div>
+	<div class="item h3">
+		6
+	</div>
+	<div class="item h3">
+		7
+	</div>
+	<div class="item h2">
+		8
+	</div>
+	<div class="item h1">
+		9
+	</div>
+	<div class="item h3">
+		10
+	</div>
+	<div class="item h3">
+		11
+	</div>
+	<div class="item h3">
+		12
+	</div>
+	<div class="item h2">
+		13
+	</div>
+	<div class="item h2">
+		14
+	</div>
+</div>
+<script>
+	var waterFull = (function () {
+		function init() {
+			setWaterfull()
+			$(window).on('resize', function () {
+				setWaterfull()
+			})
+
+			function setWaterfull() {
+				// 瀑布流布局核心思路
+				// 1.宽度一致，高度随机
+				// 2.设置等比缩放，让它可以恰如其分地穿插进来
+				// 3.为元素设置绝对定位，绝对定位的起始点是全部元素中高度最低的那个
+
+				// js代码思路
+				// 容器的宽度除以卡片的宽度取整数就得到了数组的个数
+				// 在数组里找到元素下标最小的元素，把新元素放在它的下面，把新元素下标加上最小下标，更新数组
+
+				var columnLength = parseInt($('.content').width() / $('.item').width())
+				// 获取列数
+				var itemArr = []
+				for (var i = 0; i < columnLength; i++) {
+					itemArr[i] = 0
+					// 对数组进行初始化
+					// 即把数组的元素数确定为列数
+				}
+				$('.item').each(function () {
+					// 对所有item进行遍历
+					var minValue = Math.min.apply(null, itemArr)
+					// 获取高度最低列的高度值
+					var minIndex = itemArr.indexOf(minValue)
+					// 获取高度最低列的index值
+
+					$(this).css({
+						top: itemArr[minIndex],
+						left: $(this).outerWidth(true) * minIndex
+						// 布尔值表示是否包含margin
+					})
+
+					itemArr[minIndex] += $(this).outerHeight()
+					// 更新该列的高度
+				})
+			}
+		}
+
+		// return回一个对象，将waterfull封装为一个属性
+		// 这样调用的话具有更好的复用性
+		return {
+			init: init
+		}
+	})()
+
+	waterFull.init()
+
+</script>
+</body>
+</html>
