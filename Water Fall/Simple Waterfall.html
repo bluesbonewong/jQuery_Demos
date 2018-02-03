@@ -42,7 +42,7 @@
 		}
 	</style>
 	<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
-	<title>Simple Waterfull</title>
+	<title>Simple Waterfall</title>
 </head>
 <body>
 <div class="content">
@@ -92,12 +92,12 @@
 <script>
 	var waterFull = (function () {
 		function init() {
-			setWaterfull()
+			setWaterfall()
 			$(window).on('resize', function () {
-				setWaterfull()
+				setWaterfall()
 			})
 
-			function setWaterfull() {
+			function setWaterfall() {
 				// 瀑布流布局核心思路
 				// 1.宽度一致，高度随机
 				// 2.设置等比缩放，让它可以恰如其分地穿插进来
